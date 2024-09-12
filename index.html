@@ -35,7 +35,7 @@
 
       <a href="index.html" class="logo d-flex align-items-center me-auto">
         <img src="assets/img/logos/new logo color.png" alt="" class="main-logo">
-        <h1 class="sitename">FD Image Studio</h1>
+        <h1 class="sitename">FDI Studio</h1>
       </a>
 
       <nav id="navmenu" class="navmenu">
@@ -839,35 +839,70 @@
           
 
           <div class="col-lg-6">
-            <form id="contactForm" method="post" action="http://localhost:3000/send-email" class="php-email-form" data-aos="fade-up" data-aos-delay="400">
+            <form id="contactForm" class="php-email-form" data-aos="fade-up" data-aos-delay="400">
               <div class="row gy-4">
-          
+            
                 <div class="col-md-6">
-                  <input type="text" name="name" class="form-control" placeholder="Your Name" required="">
+                  <input type="text" name="name" class="form-control" placeholder="Your Name" required>
                 </div>
-          
+            
                 <div class="col-md-6">
-                  <input type="email" class="form-control" name="email" placeholder="Your Email" required="">
+                  <input type="email" class="form-control" name="email" placeholder="Your Email" required>
                 </div>
-          
+            
                 <div class="col-md-12">
-                  <input type="text" class="form-control" name="subject" placeholder="Subject" required="">
+                  <input type="text" class="form-control" name="subject" placeholder="Subject" required>
                 </div>
-          
+            
                 <div class="col-md-12">
-                  <textarea class="form-control" name="message" rows="6" placeholder="Message" required=""></textarea>
+                  <textarea class="form-control" name="message" rows="6" placeholder="Message" required></textarea>
                 </div>
-          
+            
                 <div class="col-md-12 text-center">
-                  <div class="loading">Loading</div>
-                  <div class="error-message"></div>
-                  <div class="sent-message">Your message has been sent. Thank you!</div>
-          
                   <button type="submit">Send Message</button>
                 </div>
-          
+            
               </div>
             </form>
+            
+
+            <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+            <script type="text/javascript">
+              (function(){
+                  emailjs.init("V32yDcWsZH0-kxr10"); // Replace with your EmailJS user ID
+              })();
+            </script>
+
+            <!-- javascript to  send an email -->
+            <script>
+              document.getElementById('contactForm').addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent form from submitting normally
+            
+                // Collect form data
+                const name = event.target.name.value;
+                const email = event.target.email.value;
+                const subject = event.target.subject.value;
+                const message = event.target.message.value;
+            
+                // Prepare EmailJS template parameters
+                const templateParams = {
+                  from_name: name,
+                  from_email: email,
+                  subject: subject,
+                  message: message
+                };
+            
+                // Send email using EmailJS
+                emailjs.send('service_4k2q59s', 'template_p72892d', templateParams)
+                  .then(function(response) {
+                    alert('Message sent successfully!');
+                  }, function(error) {
+                    alert('Failed to send message. Please try again later.');
+                  });
+              });
+            </script>
+            
+
           </div><!-- End Contact Form -->
           
 
@@ -894,10 +929,10 @@
             <p><strong>Email:</strong> <span>umuhiruduhujefaustin@gmail.com</span></p>
           </div>
           <div class="social-links d-flex mt-4">
-            <a href=""><i class="bi bi-twitter-x"></i></a>
-            <a href=""><i class="bi bi-facebook"></i></a>
-            <a href=""><i class="bi bi-instagram"></i></a>
-            <a href=""><i class="bi bi-linkedin"></i></a>
+            <a href="https://www.tiktok.com/@muhiretvshow?is_from_webapp=1&sender_device=pc" target="_blank"><i class="bi bi-tiktok"></i></a>
+            <a href="https://x.com/muhiretvshow" target="_blank"><i class="bi bi-twitter-x"></i></a>
+            <a href="https://www.instagram.com/fdimagestudio?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank"><i class="bi bi-instagram"></i></a>
+            <a href="https://www.youtube.com/@M_tv_show" target="_blank"><i class="bi bi-youtube"></i></a>
           </div>
         </div>
 
@@ -915,7 +950,7 @@
         <div class="col-lg-2 col-md-3 footer-links">
           <h4>Our Services</h4>
           <ul>
-            <li><a href="#">Web Design</a></li>
+            <li><a href="#">Portraits</a></li>
             <li><a href="#">Photo Shoot</a></li>
             <li><a href="#">Wedding Shoot</a></li>
             <li><a href="#">Birtday Ceremonies</a></li>
@@ -926,11 +961,8 @@
         <div class="col-lg-4 col-md-12 footer-newsletter">
           <h4>Our Newsletter</h4>
           <p>Subscribe to our newsletter and receive the latest news about our products and services!</p>
-          <form action="forms/newsletter.php" method="post" class="php-email-form">
+          <form method="post" class="php-email-form">
             <div class="newsletter-form"><input type="email" name="email"><input type="submit" value="Subscribe"></div>
-            <div class="loading">Loading</div>
-            <div class="error-message"></div>
-            <div class="sent-message">Your subscription request has been sent. Thank you!</div>
           </form>
         </div>
 
@@ -938,9 +970,16 @@
     </div>
 
     <div class="container copyright text-center mt-4">
-      <p>© <span>Copyright</span> <strong class="px-1 sitename">FDI Studio</strong><span>All Rights Reserved</span></p>
-      <div class="credits">
-        Designed by <a href="https://www.instagram.com/_s.am.u.e.l_/">HAGENIMANA Samuel</a>
+      <p>© <span>Copyright</span> <strong class="px-1 sitename">FDI Studio</strong> <span id="currentYear"></span> <span>All Rights Reserved</span></p>  
+
+      <script>  
+          // Get the current year  
+          const currentYear = new Date().getFullYear();  
+          // Display the current year in the span  
+          document.getElementById('currentYear').textContent = currentYear;  
+      </script>
+            <div class="credits">
+        Designed by <a href="https://www.instagram.com/_s.am.u.e.l_/" target="_blank">HAGENIMANA Samuel</a>
       </div>
     </div>
 
